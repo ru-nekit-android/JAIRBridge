@@ -1,6 +1,7 @@
 package ru.nekit.android;
 
 import android.content.Context;
+import android.view.View;
 
 public class StubJAIRBridgeContext implements IJAIR
 {
@@ -69,6 +70,12 @@ public class StubJAIRBridgeContext implements IJAIR
 
 	@Override
 	public void unregisterEventReserver(IJAIREventReceivable receiver) 
+	{
+
+	}
+
+	@Override
+	public void publishValue(String name, View value) 
 	{
 
 	}

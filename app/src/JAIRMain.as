@@ -1,6 +1,8 @@
 package
 {
 	
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.events.StatusEvent;
 	import flash.utils.setTimeout;
 	
@@ -15,13 +17,14 @@ package
 			super();
 			setTimeout(function():void
 			{
-				startUp(true);
+				startUp(false);
 			}, 1900);
 		}
 		
 		override public function onStartUp():void
 		{
 			var version:String = this.version;
+			trace(version);
 		}
 		
 		override public function onStatus(event:StatusEvent):void
@@ -36,9 +39,16 @@ package
 		
 		override public function onPublish(item:PublishItem):void
 		{
-			var value:String = item.value as String;
-			trace(value);
-			dispatchStatusEvent("--", value);
+			if( item.isBitmapData )
+			{
+				var bmp:Bitmap = new Bitmap(BitmapData(item.value));
+				addChild(bmp);
+			}
+			else
+			{
+				var value:String = item.value as String;
+				trace(value);
+			}
 		}
 	}
 }

@@ -1,5 +1,9 @@
 package ru.nekit.ane
 {
+	import flash.display.BitmapData;
+	import flash.display.BitmapDataChannel;
+	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	public class PublishItem
 	{
@@ -27,13 +31,43 @@ package ru.nekit.ane
 			return new PublishItem(valueArray[1], valueArray[0]);
 		}
 		
+		public function get isBitmapData():Boolean
+		{
+			return type == "view::bitmapData";
+		}
+		
+		public function destroy():void
+		{
+			if( isBitmapData  )
+			{
+				BitmapData(_value).dispose();
+				_value = null;
+			}
+		}
+		
 		public function get value():Object
 		{
 			if( _value )
 			{
 				return _value;
 			}
-			return _value = context.getPublishValue(this);
+			if( isBitmapData  )
+			{
+				var zeroPoint:Point = new Point(0, 0);
+				var bitmapDataSource:BitmapData = context.getPublishValue(this) as BitmapData;
+				var bitmapDataSourceRect:Rectangle = bitmapDataSource.rect;
+				var bitmapData:BitmapData = new BitmapData(bitmapDataSource.width, bitmapDataSource.height, true);
+				bitmapData.copyChannel(bitmapDataSource, bitmapDataSourceRect, zeroPoint, BitmapDataChannel.RED, BitmapDataChannel.BLUE);
+				bitmapData.copyChannel(bitmapDataSource, bitmapDataSourceRect, zeroPoint, BitmapDataChannel.GREEN, BitmapDataChannel.GREEN);
+				bitmapData.copyChannel(bitmapDataSource, bitmapDataSourceRect, zeroPoint, BitmapDataChannel.BLUE, BitmapDataChannel.RED);
+				bitmapData.copyChannel(bitmapDataSource, bitmapDataSourceRect, zeroPoint, BitmapDataChannel.ALPHA, BitmapDataChannel.ALPHA);
+				_value = bitmapData;
+			}
+			else
+			{
+				_value = context.getPublishValue(this);
+			}
+			return _value
 		}
 	}
 }

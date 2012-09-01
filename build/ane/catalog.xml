@@ -10,14 +10,20 @@
   </features>
   <libraries>
     <library path="library.swf">
-      <script name="ru/nekit/ane/PublishItem" mod="1346511967000" signatureChecksum="1642027747" >
+      <script name="ru/nekit/ane/PublishItem" mod="1346524041000" signatureChecksum="742101393" >
         <def id="ru.nekit.ane:PublishItem" /> 
+        <dep id="flash.display:BitmapDataChannel" type="e" /> 
+        <dep id="flash.display:BitmapData" type="e" /> 
+        <dep id="flash.geom:Point" type="e" /> 
+        <dep id="flash.display:BitmapData" type="s" /> 
+        <dep id="flash.geom:Rectangle" type="s" /> 
+        <dep id="flash.geom:Point" type="s" /> 
         <dep id="ru.nekit.ane:ICommunicationable" type="s" /> 
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="_060419a0fff8c998c5e5712846c6d06c97c73000df47206c4307b0479e671dc0_flash_display_Sprite" mod="1346513629189" signatureChecksum="191854689" >
-        <def id="_060419a0fff8c998c5e5712846c6d06c97c73000df47206c4307b0479e671dc0_flash_display_Sprite" /> 
+      <script name="_c5198ef10d85fa1c8c681f18cd83468e3ffd1c79b471ca4ac82ddcea47b7ebb0_flash_display_Sprite" mod="1346524115785" signatureChecksum="230718693" >
+        <def id="_c5198ef10d85fa1c8c681f18cd83468e3ffd1c79b471ca4ac82ddcea47b7ebb0_flash_display_Sprite" /> 
         <dep id="flash.system:Security" type="e" /> 
         <dep id="AS3" type="n" /> 
         <dep id="flash.display:Sprite" type="i" /> 
@@ -42,7 +48,7 @@
         <dep id="flash.display:Sprite" type="i" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="acfb8e42f693d1e36ad243ab3579dd6f30550b332e53d6d884307f920d573367"   />
+        <digest type="SHA-256" signed="false" value="84371e0b194868a550da074b2e3d35cb3eddd34b2f34a49e286846852cdd6733"   />
       </digests>
     </library>
   </libraries>

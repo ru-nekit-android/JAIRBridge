@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.view.View;
+
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
@@ -87,14 +89,14 @@ public class JAIRBridgeContext extends FREContext implements IJAIR {
 	public void publishValue(String name, int value)
 	{
 		String id = "int." + name;
-		publishMap.put(name, id);
+		publishMap.put(id, value);
 		dispatchStatusEvent(LEVEL_PUBLISH, id);
 	}
 
 	public void publishValue(String name, double value)
 	{
 		String id = "double." + name;
-		publishMap.put(name, id);
+		publishMap.put(id, value);
 		dispatchStatusEvent(LEVEL_PUBLISH, id);
 	}
 
@@ -108,7 +110,14 @@ public class JAIRBridgeContext extends FREContext implements IJAIR {
 	public void publishValue(String name, boolean value)
 	{
 		String id = "boolean." + name;
-		publishMap.put(name, id);
+		publishMap.put(id, value);
+		dispatchStatusEvent(LEVEL_PUBLISH, id);
+	}
+	
+	public void publishValue(String name, View value)
+	{
+		String id = "view::bitmapData." + name;
+		publishMap.put(id, value);
 		dispatchStatusEvent(LEVEL_PUBLISH, id);
 	}
 

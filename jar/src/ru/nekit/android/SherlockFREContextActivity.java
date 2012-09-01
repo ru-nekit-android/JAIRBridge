@@ -1,5 +1,7 @@
 package ru.nekit.android;
 
+import android.view.View;
+
 import com.actionbarsherlock.app.SherlockActivity;
 
 public class SherlockFREContextActivity extends SherlockActivity implements IJAIR {
@@ -77,5 +79,11 @@ public class SherlockFREContextActivity extends SherlockActivity implements IJAI
 	public void unregisterEventReserver(IJAIREventReceivable receiver) 
 	{
 		context.unregisterEventReserver(receiver);
+	}
+
+	@Override
+	public void publishValue(String name, View value) 
+	{
+		context.publishValue(name, value);
 	}
 }

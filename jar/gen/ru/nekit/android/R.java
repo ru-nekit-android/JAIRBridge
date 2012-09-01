@@ -840,6 +840,7 @@ containing a value of this type.
         public static final int showTitle=0x7f050007;
         public static final int tabMode=0x7f050003;
         public static final int useLogo=0x7f050004;
+        public static final int webView=0x7f050029;
         public static final int wrap_content=0x7f050000;
     }
     public static final class integer {

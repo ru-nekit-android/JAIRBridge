@@ -1,5 +1,13 @@
 package ru.nekit.android;
 
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+
+import com.adobe.fre.FREASErrorException;
+import com.adobe.fre.FREBitmapData;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREInvalidObjectException;
@@ -49,14 +57,42 @@ public class GetPublishValue implements FREFunction {
 					{
 						return FREObject.newObject(((Double)context.getPublishMap().remove(id)).doubleValue());
 					}
+					if( type.equals("view::bitmapData") )
+					{
+						View view = (View)context.getPublishMap().remove(id);
+						Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+						Canvas canvas = new Canvas(bitmap);
+						Drawable bgDrawable = view.getBackground();
+						if (bgDrawable!=null) 
+							bgDrawable.draw(canvas);
+						else 
+							canvas.drawColor(Color.WHITE);
+						view.draw(canvas);
+						Byte[] fillcolor = {0, 0, 0, 0};
+						FREBitmapData data = null;
+						try {
+							data = FREBitmapData.newBitmapData(view.getWidth(), view.getHeight(), true, fillcolor);
+							data.acquire();
+							bitmap.copyPixelsToBuffer(data.getBits());
+							data.release();
+						} catch (IllegalArgumentException e) {
+							e.printStackTrace();
+						} catch (FREASErrorException e) {
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+							e.printStackTrace();
+						} catch (FREInvalidObjectException e) {
+							e.printStackTrace();
+						}
+						return data;
+					}
 				} catch (FREWrongThreadException e) {
 					e.printStackTrace();
-					context.dispatchErrorEvent("Error get value for key: " + id);
 				}
 			}
 			else
 			{
-				context.dispatchErrorEvent("No value for key: " + id);
+				context.dispatchErrorEvent("No pulished value by id: " + id);
 			}
 		}
 		return null;
