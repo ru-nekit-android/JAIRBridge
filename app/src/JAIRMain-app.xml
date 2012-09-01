@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<application xmlns="http://ns.adobe.com/air/application/3.4">
+
+	<id>ru.nekit.JAIR</id>
+	<filename>JAIR</filename>
+	<name>JAIR</name>
+	<versionNumber>1.0.0</versionNumber>
+	<versionLabel>1.0</versionLabel>
+	<copyright>© 2012, nekit. All rights reserved.</copyright>
+	<description>Reverse bridge Android - Air</description>
+	<initialWindow>
+		<content/>
+		<systemChrome>none</systemChrome>
+		<transparent>true</transparent>
+		<visible>false</visible>
+		<minimizable>true</minimizable>
+		<maximizable>false</maximizable>
+		<resizable>false</resizable>
+		<autoOrients>false</autoOrients>
+		<fullScreen>false</fullScreen>
+	</initialWindow>
+
+	<android>
+		<manifestAdditions>
+		<![CDATA[
+			<manifest android:installLocation="auto">
+				<uses-sdk android:minSdkVersion="8" android:targetSdkVersion="15"/>
+				<uses-permission android:name="android.permission.VIBRATE" />
+				<uses-permission android:name="android.permission.INTERNET"/>
+				<application 
+					android:enabled="true" 
+					android:hardwareAccelerated="true"
+        			android:theme="@style/AppTheme"
+					>
+					<activity
+						android:excludeFromRecents="false" 
+						android:alwaysRetainTaskState="true" 
+						android:launchMode="singleInstance"
+						>
+						<intent-filter> 
+							<action android:name="android.intent.action.MAIN" /> 
+							<category android:name="android.intent.category.LAUNCHER"/> 
+						</intent-filter> 
+					</activity> 
+									
+				    <activity android:name="ru.nekit.android.StartUpActivity"
+				    	android:excludeFromRecents="false" 
+				    	android:screenOrientation="portrait"
+	    				android:configChanges="orientation|keyboardHidden|keyboard"
+				    	>			
+				    	<intent-filter> 
+							<action android:name="android.intent.action.MAIN" /> 
+							<category android:name="android.intent.category.LAUNCHER"/> 
+						</intent-filter> 
+				    </activity>
+				    
+				    <activity android:name="ru.nekit.android.NextActivity" 
+				    	android:excludeFromRecents="false"
+				    	android:screenOrientation="portrait"
+	    				android:configChanges="orientation|keyboardHidden|keyboard" 
+				     > 				
+					</activity>
+			
+	    		</application>
+			</manifest>		
+		]]></manifestAdditions>
+	</android>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<extensions>
+        <extensionID>ru.nekit.android.JAIRBridge</extensionID>
+    </extensions>
+</application>

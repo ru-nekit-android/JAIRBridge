@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding ="utf-8"?>
+<swc xmlns="http://www.adobe.com/flash/swccatalog/9">
+  <versions>
+    <swc version="1.2" />
+    <flex version="4.6.0" build="23201" minimumSupportedVersion="3.0.0" />
+  </versions>
+  <features>
+    <feature-script-deps />
+    <feature-files />
+  </features>
+  <libraries>
+    <library path="library.swf">
+      <script name="ru/nekit/ane/PublishItem" mod="1346511967000" signatureChecksum="1642027747" >
+        <def id="ru.nekit.ane:PublishItem" /> 
+        <dep id="ru.nekit.ane:ICommunicationable" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="_060419a0fff8c998c5e5712846c6d06c97c73000df47206c4307b0479e671dc0_flash_display_Sprite" mod="1346513629189" signatureChecksum="191854689" >
+        <def id="_060419a0fff8c998c5e5712846c6d06c97c73000df47206c4307b0479e671dc0_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="ru/nekit/ane/ICommunicationable" mod="1346511967000" signatureChecksum="1931707750" >
+        <def id="ru.nekit.ane:ICommunicationable" /> 
+        <dep id="ru.nekit.ane:PublishItem" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="ru/nekit/ane/JAIRBridge" mod="1346513628000" signatureChecksum="3052852921" >
+        <def id="ru.nekit.ane:JAIRBridge" /> 
+        <dep id="ru.nekit.ane:PublishItem" type="e" /> 
+        <dep id="flash.events:StatusEvent" type="e" /> 
+        <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="ru.nekit.ane:PublishItem" type="s" /> 
+        <dep id="flash.events:StatusEvent" type="s" /> 
+        <dep id="flash.external:ExtensionContext" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="ru.nekit.ane:ICommunicationable" type="i" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <digests>
+        <digest type="SHA-256" signed="false" value="acfb8e42f693d1e36ad243ab3579dd6f30550b332e53d6d884307f920d573367"   />
+      </digests>
+    </library>
+  </libraries>
+  <files>
+  </files>
+</swc>

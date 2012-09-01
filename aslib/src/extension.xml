@@ -1,0 +1,14 @@
+<extension xmlns="http://ns.adobe.com/air/extension/3.1">
+	<id>ru.nekit.android.JAIRBridge</id>
+	<versionNumber>1</versionNumber>
+	<platforms>
+		<platform name="Android-ARM">
+			<applicationDeployment>
+				<nativeLibrary>JAIRBridge.jar</nativeLibrary>
+				<initializer>ru.nekit.android.JAIRBridgeExtension</initializer>
+				<finalizer>ru.nekit.android.JAIRBridgeExtension</finalizer>
+			</applicationDeployment>
+		</platform>
+	</platforms>
+	<copyright>© 2012, nekit. All rights reserved.</copyright>
+</extension>
