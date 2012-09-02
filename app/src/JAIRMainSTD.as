@@ -16,10 +16,11 @@ package
 		public function JAIRMainSTD()
 		{
 			p2p = new LocalNetworkDiscovery;
+			
 			p2p.clientName = "mobile";
 			p2p.key = "fa34a2a9cd8864b67cdb154d-ac8a93ff4df0";
 			p2p.useCirrus = true;
-			p2p.groupName = "nelch";
+			p2p.groupName = "ru.nekit.p2p.group_none";
 			p2p.addEventListener(ClientEvent.CLIENT_ADDED, clientAddedHandler);
 			p2p.addEventListener(ClientEvent.CLIENT_UPDATE, clientUpdateHandler);
 			p2p.addEventListener(GroupEvent.GROUP_CONNECTED, groupConnectedHandler);

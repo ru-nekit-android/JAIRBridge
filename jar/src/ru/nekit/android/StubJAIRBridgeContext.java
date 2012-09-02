@@ -63,13 +63,13 @@ public class StubJAIRBridgeContext implements IJAIR
 	}
 
 	@Override
-	public void registerEventReserver(IJAIREventReceivable receiver) 
+	public void registerStatusEventReceiver(IJAIRStatusEventReceivable receiver) 
 	{
 
 	}
 
 	@Override
-	public void unregisterEventReserver(IJAIREventReceivable receiver) 
+	public void unregisterStatusEventReceiver(IJAIRStatusEventReceivable receiver) 
 	{
 
 	}

@@ -10,7 +10,8 @@ package ru.nekit.ane
 		
 		public static const LEVEL_ERROR:String 		= "ru.nekit.error";
 		public static const LEVEL_SERVICE:String 	= "ru.nekit.service";
-		public static const LEVEL_PUBLISH:String 	= "ru.nekit.publish";		
+		public static const LEVEL_PUBLISH:String 	= "ru.nekit.publish";	
+		public static const LEVEL_EXECUTE:String 	= "ru.nekit.execute";	
 		
 		public static const STARTUP:String = "startup";
 		
@@ -23,6 +24,7 @@ package ru.nekit.ane
 			context = ExtensionContext.createExtensionContext("ru.nekit.android.JAIRBridge", null);
 			context.addEventListener(StatusEvent.STATUS, _onStatus); 
 			PublishItem.context = this;
+			P2PConnectionEntry.context = this;
 			super();
 		}	
 		
@@ -61,6 +63,12 @@ package ru.nekit.ane
 					break;
 				}
 					
+				case LEVEL_EXECUTE:
+					
+					context.call("execute", code);
+					
+					break;
+				
 				default:
 					break;
 			}
@@ -96,6 +104,11 @@ package ru.nekit.ane
 		public function dispatchStatusEvent(name:String, ... args):void
 		{
 			context.call.apply(null, ["dispatchStatusEvent", name].concat(args));
+		}
+		
+		public function dispatchP2PStatusEvent(name:String, ... args):void
+		{
+			context.call.apply(null, ["dispatchP2PStatusEvent", name].concat(args));
 		}
 		
 		public function getPublishValue(item:PublishItem):Object

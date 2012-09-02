@@ -16,7 +16,7 @@ public interface IJAIR {
 	void publishValue(String name, boolean value);
 	void publishValue(String name, View value);
 	
-	void registerEventReserver(IJAIREventReceivable receiver);
-	void unregisterEventReserver(IJAIREventReceivable receiver);
+	void registerStatusEventReceiver(IJAIRStatusEventReceivable receiver);
+	void unregisterStatusEventReceiver(IJAIRStatusEventReceivable receiver);
 	
 }

@@ -2,6 +2,7 @@
 <flexLibProperties includeAllClasses="true" useMultiPlatformConfig="true" version="3">
   <includeClasses>
     <classEntry path="ru.nekit.ane.PublishItem"/>
+    <classEntry path="ru.nekit.ane.P2PConnectionEntry"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

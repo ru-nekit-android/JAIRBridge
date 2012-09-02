@@ -14,7 +14,7 @@ import com.adobe.fre.FREObject;
 import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
 
-public class NextActivity extends SherlockFREContextActivity implements OnClickListener, IJAIREventReceivable {
+public class NextActivity extends SherlockFREContextActivity implements OnClickListener, IJAIRStatusEventReceivable {
 
 	private Button call;
 	private EditText editText;
@@ -35,7 +35,7 @@ public class NextActivity extends SherlockFREContextActivity implements OnClickL
 		WebSettings ws = webView.getSettings();
 		ws.setBuiltInZoomControls(true);
 		ws.setDefaultTextEncodingName("utf-8");
-		registerEventReserver(this);
+		registerStatusEventReceiver(this);
 	}
 
 	@Override
@@ -49,11 +49,11 @@ public class NextActivity extends SherlockFREContextActivity implements OnClickL
 	protected void onDestroy() 
 	{
 		super.onDestroy();
-		unregisterEventReserver(this);
+		unregisterStatusEventReceiver(this);
 	}
 
 	@Override
-	public void onEventReceive(String name, FREObject[] args) 
+	public void onStatusEventReceive(String name, FREObject[] args) 
 	{
 		try {
 			dispatchStatusEvent("++", name + "::" + args[0].getAsString());

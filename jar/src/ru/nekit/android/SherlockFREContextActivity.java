@@ -4,9 +4,10 @@ import android.view.View;
 
 import com.actionbarsherlock.app.SherlockActivity;
 
-public class SherlockFREContextActivity extends SherlockActivity implements IJAIR {
+public class SherlockFREContextActivity extends SherlockActivity implements IJAIR, IP2P {
 
-	private IJAIR context;
+	protected IJAIR context;
+	protected IP2P p2pContext;
 
 	public SherlockFREContextActivity()
 	{
@@ -14,10 +15,12 @@ public class SherlockFREContextActivity extends SherlockActivity implements IJAI
 		if( CONFIG.USE_REVERSE_BRIDGE )
 		{
 			context = JAIRBridgeContext.getInstance();
+			p2pContext = JAIRBridgeContext.getInstance();
 		}
 		else
 		{
 			context = new StubJAIRBridgeContext(this);
+			p2pContext = new StubP2PContext(this);
 		}
 	}
 
@@ -70,20 +73,38 @@ public class SherlockFREContextActivity extends SherlockActivity implements IJAI
 	}
 
 	@Override
-	public void registerEventReserver(IJAIREventReceivable receiver) 
+	public void registerStatusEventReceiver(IJAIRStatusEventReceivable receiver) 
 	{
-		context.registerEventReserver(receiver);
+		context.registerStatusEventReceiver(receiver);
 	}
 
 	@Override
-	public void unregisterEventReserver(IJAIREventReceivable receiver) 
+	public void unregisterStatusEventReceiver(IJAIRStatusEventReceivable receiver) 
 	{
-		context.unregisterEventReserver(receiver);
+		context.unregisterStatusEventReceiver(receiver);
 	}
 
 	@Override
 	public void publishValue(String name, View value) 
 	{
 		context.publishValue(name, value);
+	}
+
+	@Override
+	public void connectP2P(String groupSuffix) 
+	{
+		p2pContext.connectP2P(groupSuffix);
+	}
+
+	@Override
+	public void registerP2PStatuEventReceiver(IP2PStatusEventReceivable receiver) 
+	{
+		p2pContext.registerP2PStatuEventReceiver(receiver);
+	}
+
+	@Override
+	public void unregisterP2PStatusEventReceiver(IP2PStatusEventReceivable receiver) 
+	{
+		p2pContext.unregisterP2PStatusEventReceiver(receiver);
 	}
 }

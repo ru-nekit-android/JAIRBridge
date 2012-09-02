@@ -7,27 +7,38 @@ import java.util.Map;
 
 import android.view.View;
 
+import com.adobe.fre.FREASErrorException;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
+import com.adobe.fre.FREInvalidObjectException;
+import com.adobe.fre.FRENoSuchNameException;
 import com.adobe.fre.FREObject;
+import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
 
-public class JAIRBridgeContext extends FREContext implements IJAIR {
+public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 
-	public static final String LEVEL_ERROR = "ru.nekit.error";
-	public static final String LEVEL_SERVICE = "ru.nekit.service";
-	public static final String LEVEL_PUBLISH = "ru.nekit.publish";
+	private static final String LEVEL_ERROR = "ru.nekit.error";
+	private static final String LEVEL_SERVICE = "ru.nekit.service";
+	private static final String LEVEL_PUBLISH = "ru.nekit.publish";
+	private static final String LEVEL_EXECUTE = "ru.nekit.execute";
+	private static final String LEVEL_P2P = "ru.nekit.p2p";
 
-	public static final String STARTUP = "startup";
+	private static final String STARTUP = "startup";
+	public static final String CONNECT_P2P = "connectP2P";
 
 	private static JAIRBridgeContext context;
 	private Map<String, Object> publishMap;
-	private List<IJAIREventReceivable> receiverList;
+	private List<IJAIRStatusEventReceivable> statusEventListReceiver;
+	private List<IP2PStatusEventReceivable> p2pStatusEventReceiverList;
+	private static HashMap<String, ArrayList<Item>> executeList;
 
 	private JAIRBridgeContext()
 	{
 		publishMap = new HashMap<String, Object>();
-		receiverList = new ArrayList<IJAIREventReceivable>();
+		statusEventListReceiver = new ArrayList<IJAIRStatusEventReceivable>();
+		p2pStatusEventReceiverList = new ArrayList<IP2PStatusEventReceivable>();
+		executeList = new HashMap<String, ArrayList<Item>>();
 	};
 
 	public Map<String, Object> getPublishMap()
@@ -35,9 +46,19 @@ public class JAIRBridgeContext extends FREContext implements IJAIR {
 		return publishMap;
 	}
 
-	public List<IJAIREventReceivable> getReceiverList()
+	public List<IJAIRStatusEventReceivable> getStatusEventReceiverList()
 	{
-		return receiverList;
+		return statusEventListReceiver;
+	}
+
+	public List<IP2PStatusEventReceivable> getP2PStatusEventReceiverList()
+	{
+		return p2pStatusEventReceiverList;
+	}
+
+	public FREObject getP2PConnectionEntry() throws IllegalStateException, FRETypeMismatchException, FREInvalidObjectException, FREASErrorException, FRENoSuchNameException, FREWrongThreadException
+	{
+		return FREObject.newObject("ru.nekit.ane.P2PConnectionEntry", null);
 	}
 
 	public static JAIRBridgeContext getInstance()
@@ -56,8 +77,10 @@ public class JAIRBridgeContext extends FREContext implements IJAIR {
 		map.put("test", 				new Test());
 		map.put("startUp", 				new StartUp());
 		map.put("version", 				new Version());
+		map.put("execute", 				new Execute());
 		map.put("getPublishValue", 		new GetPublishValue());
 		map.put("dispatchStatusEvent", 	new DispatchStatusEvent());
+		map.put("dispatchP2PStatusEvent", 	new DispatchP2PStatusEvent());
 		return map;
 	}
 
@@ -113,7 +136,7 @@ public class JAIRBridgeContext extends FREContext implements IJAIR {
 		publishMap.put(id, value);
 		dispatchStatusEvent(LEVEL_PUBLISH, id);
 	}
-	
+
 	public void publishValue(String name, View value)
 	{
 		String id = "view::bitmapData." + name;
@@ -121,17 +144,17 @@ public class JAIRBridgeContext extends FREContext implements IJAIR {
 		dispatchStatusEvent(LEVEL_PUBLISH, id);
 	}
 
-	public void registerEventReserver(IJAIREventReceivable receiver)
+	public void registerStatusEventReceiver(IJAIRStatusEventReceivable receiver)
 	{
-		if( !receiverList.contains(receiver) )
+		if( !statusEventListReceiver.contains(receiver) )
 		{
-			receiverList.add(receiver);
+			statusEventListReceiver.add(receiver);
 		}
 	}
 
-	public void unregisterEventReserver(IJAIREventReceivable receiver)
+	public void unregisterStatusEventReceiver(IJAIRStatusEventReceivable receiver)
 	{
-		receiverList.remove(receiver);
+		statusEventListReceiver.remove(receiver);
 	}
 
 	public void dispatchStatusEvent(String level, String code)
@@ -151,6 +174,104 @@ public class JAIRBridgeContext extends FREContext implements IJAIR {
 	public void dispose() 
 	{
 		publishMap.clear();
-		receiverList.clear();
+		statusEventListReceiver.clear();
+		p2pStatusEventReceiverList.clear();
+		executeList.clear();
+	}
+
+	public void sturtUp()
+	{
+		dispatchServiceEvent(JAIRBridgeContext.STARTUP);	
+		try {
+			getP2PConnectionEntry().callMethod("init", null);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (FRETypeMismatchException e) {
+			e.printStackTrace();
+		} catch (FREInvalidObjectException e) {
+			e.printStackTrace();
+		} catch (FREASErrorException e) {
+			e.printStackTrace();
+		} catch (FRENoSuchNameException e) {
+			e.printStackTrace();
+		} catch (FREWrongThreadException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void waitExecute(String name, ArrayList<Item> args)
+	{
+		executeList.put(name, args);
+		dispatchStatusEvent(LEVEL_EXECUTE, name);
+	}
+
+	public void execute(String name)
+	{
+		ArrayList<Item> sargs = executeList.remove(name);
+		int length = sargs.size();
+		FREObject[] args = new FREObject[length];
+		for( int i = 0; i < length; i++)
+		{
+			Item item = sargs.get(i);
+			try {
+				if( item.type == "string" )
+				{
+					args[i] = FREObject.newObject((String)item.value);
+				}
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			getP2PConnectionEntry().callMethod(name, args);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (FRETypeMismatchException e) {
+			e.printStackTrace();
+		} catch (FREInvalidObjectException e) {
+			e.printStackTrace();
+		} catch (FREASErrorException e) {
+			e.printStackTrace();
+		} catch (FRENoSuchNameException e) {
+			e.printStackTrace();
+		} catch (FREWrongThreadException e) {
+			e.printStackTrace();
+		}
+		dispatchServiceEvent("end");
+	}
+
+	@Override
+	public void connectP2P(String groupSuffix) 
+	{
+		ArrayList<Item> args = new ArrayList<Item>();
+		args.add(new Item("string", groupSuffix));
+		waitExecute("connect", args);
+	}
+
+	private class Item
+	{
+		public String type;
+		public Object value;
+
+		public Item(String type, Object value)
+		{
+			this.type = type;
+			this.value = value;
+		}
+
+	}
+
+	@Override
+	public void registerP2PStatuEventReceiver(IP2PStatusEventReceivable receiver) {
+		if( !p2pStatusEventReceiverList.contains(receiver) )
+		{
+			p2pStatusEventReceiverList.add(receiver);
+		}
+	}
+
+	@Override
+	public void unregisterP2PStatusEventReceiver(IP2PStatusEventReceivable receiver)
+	{
+		p2pStatusEventReceiverList.remove(receiver);
 	}
 }

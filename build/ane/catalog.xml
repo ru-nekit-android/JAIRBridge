@@ -10,6 +10,67 @@
   </features>
   <libraries>
     <library path="library.swf">
+      <script name="com/projectcocoon/p2p/vo/AccelerationVO" mod="1346551075000" signatureChecksum="1907778699" >
+        <def id="com.projectcocoon.p2p.vo:AccelerationVO" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/managers/GroupManager" mod="1346552393000" signatureChecksum="231644136" >
+        <def id="com.projectcocoon.p2p.managers:GroupManager" /> 
+        <dep id="flash.net:NetGroup" type="e" /> 
+        <dep id="com.projectcocoon.p2p.command:CommandList" type="e" /> 
+        <dep id="com.projectcocoon.p2p:NetStatusCode" type="e" /> 
+        <dep id="flash.net:GroupSpecifier" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:GroupEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:ObjectEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:MessageEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="com.projectcocoon.p2p.command:CommandType" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:MessageVO" type="e" /> 
+        <dep id="flash.utils:Dictionary" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:ClientEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:ObjectMetadataVO" type="e" /> 
+        <dep id="flash.events:NetStatusEvent" type="e" /> 
+        <dep id="flash.net:NetGroup" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.net:GroupSpecifier" type="s" /> 
+        <dep id="com.projectcocoon.p2p.command:CommandType" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:MessageVO" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="flash.net:NetConnection" type="s" /> 
+        <dep id="flash.events:NetStatusEvent" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/events/AccelerationEvent" mod="1346551075000" signatureChecksum="4041765860" >
+        <def id="com.projectcocoon.p2p.events:AccelerationEvent" /> 
+        <dep id="com.projectcocoon.p2p.vo:AccelerationVO" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="_de206025dc1a725e0528187ba2d951722139e778911ae729ba611aab3b2ead40_flash_display_Sprite" mod="1346600781481" signatureChecksum="2145089845" >
+        <def id="_de206025dc1a725e0528187ba2d951722139e778911ae729ba611aab3b2ead40_flash_display_Sprite" /> 
+        <dep id="flash.system:Security" type="e" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.display:Sprite" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/NetStatusCode" mod="1346551075000" signatureChecksum="2211387037" >
+        <def id="com.projectcocoon.p2p:NetStatusCode" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/events/ObjectEvent" mod="1346551075000" signatureChecksum="2240384793" >
+        <def id="com.projectcocoon.p2p.events:ObjectEvent" /> 
+        <dep id="com.projectcocoon.p2p.vo:ObjectMetadataVO" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
       <script name="ru/nekit/ane/PublishItem" mod="1346524041000" signatureChecksum="742101393" >
         <def id="ru.nekit.ane:PublishItem" /> 
         <dep id="flash.display:BitmapDataChannel" type="e" /> 
@@ -22,11 +83,76 @@
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="_c5198ef10d85fa1c8c681f18cd83468e3ffd1c79b471ca4ac82ddcea47b7ebb0_flash_display_Sprite" mod="1346524115785" signatureChecksum="230718693" >
-        <def id="_c5198ef10d85fa1c8c681f18cd83468e3ffd1c79b471ca4ac82ddcea47b7ebb0_flash_display_Sprite" /> 
-        <dep id="flash.system:Security" type="e" /> 
+      <script name="com/projectcocoon/p2p/events/ClientEvent" mod="1346551075000" signatureChecksum="1359579805" >
+        <def id="com.projectcocoon.p2p.events:ClientEvent" /> 
+        <dep id="flash.net:NetGroup" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="s" /> 
         <dep id="AS3" type="n" /> 
-        <dep id="flash.display:Sprite" type="i" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/managers/ObjectManager" mod="1346551075000" signatureChecksum="3671170425" >
+        <def id="com.projectcocoon.p2p.managers:ObjectManager" /> 
+        <dep id="ArgumentError" type="e" /> 
+        <dep id="flash.utils:ByteArray" type="e" /> 
+        <dep id="flash.net:NetGroup" type="e" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="com.projectcocoon.p2p.command:CommandList" type="e" /> 
+        <dep id="com.projectcocoon.p2p.util:SerializationUtil" type="e" /> 
+        <dep id="com.projectcocoon.p2p:NetStatusCode" type="e" /> 
+        <dep id="Math" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:GroupEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:ObjectEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:MessageEvent" type="e" /> 
+        <dep id="Date" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="com.projectcocoon.p2p.command:CommandType" type="e" /> 
+        <dep id="flash.utils:Dictionary" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:ObjectMetadataVO" type="e" /> 
+        <dep id="flash.events:NetStatusEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:ObjectEvent" type="s" /> 
+        <dep id="flash.events:Event" type="s" /> 
+        <dep id="flash.utils:ByteArray" type="s" /> 
+        <dep id="flash.net:NetGroup" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="flash.utils:Dictionary" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:MessageVO" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:ObjectMetadataVO" type="s" /> 
+        <dep id="com.projectcocoon.p2p.events:GroupEvent" type="s" /> 
+        <dep id="com.projectcocoon.p2p.managers:GroupManager" type="s" /> 
+        <dep id="flash.events:NetStatusEvent" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/vo/ObjectMetadataVO" mod="1346551075000" signatureChecksum="2401463528" >
+        <def id="com.projectcocoon.p2p.vo:ObjectMetadataVO" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/command/CommandList" mod="1346551075000" signatureChecksum="577981896" >
+        <def id="com.projectcocoon.p2p.command:CommandList" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/util/ClassRegistry" mod="1346551075000" signatureChecksum="1810525263" >
+        <def id="com.projectcocoon.p2p.util:ClassRegistry" /> 
+        <dep id="flash.net:registerClassAlias" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:AccelerationVO" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:MessageVO" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:ObjectMetadataVO" type="e" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/events/GroupEvent" mod="1346551075000" signatureChecksum="532836543" >
+        <def id="com.projectcocoon.p2p.events:GroupEvent" /> 
+        <dep id="flash.net:NetGroup" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
       </script>
       <script name="ru/nekit/ane/ICommunicationable" mod="1346511967000" signatureChecksum="1931707750" >
         <def id="ru.nekit.ane:ICommunicationable" /> 
@@ -35,11 +161,12 @@
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="ru/nekit/ane/JAIRBridge" mod="1346513628000" signatureChecksum="3052852921" >
+      <script name="ru/nekit/ane/JAIRBridge" mod="1346595028000" signatureChecksum="382661559" >
         <def id="ru.nekit.ane:JAIRBridge" /> 
         <dep id="ru.nekit.ane:PublishItem" type="e" /> 
         <dep id="flash.events:StatusEvent" type="e" /> 
         <dep id="flash.external:ExtensionContext" type="e" /> 
+        <dep id="ru.nekit.ane:P2PConnectionEntry" type="e" /> 
         <dep id="ru.nekit.ane:PublishItem" type="s" /> 
         <dep id="flash.events:StatusEvent" type="s" /> 
         <dep id="flash.external:ExtensionContext" type="s" /> 
@@ -47,8 +174,101 @@
         <dep id="ru.nekit.ane:ICommunicationable" type="i" /> 
         <dep id="flash.display:Sprite" type="i" /> 
       </script>
+      <script name="com/projectcocoon/p2p/vo/ClientVO" mod="1346551075000" signatureChecksum="1447382090" >
+        <def id="com.projectcocoon.p2p.vo:ClientVO" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/events/MessageEvent" mod="1346551075000" signatureChecksum="2207350979" >
+        <def id="com.projectcocoon.p2p.events:MessageEvent" /> 
+        <dep id="flash.net:NetGroup" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:MessageVO" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:Event" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/LocalNetworkDiscovery" mod="1346561145000" signatureChecksum="711001972" >
+        <def id="com.projectcocoon.p2p:LocalNetworkDiscovery" /> 
+        <dep id="flash.events:Event" type="e" /> 
+        <dep id="com.projectcocoon.p2p.command:CommandList" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:AccelerationVO" type="e" /> 
+        <dep id="com.projectcocoon.p2p.util:ClassRegistry" type="e" /> 
+        <dep id="com.projectcocoon.p2p:NetStatusCode" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:GroupEvent" type="e" /> 
+        <dep id="flash.sensors:Accelerometer" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:ObjectEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:MessageEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="e" /> 
+        <dep id="__AS3__.vec:Vector" type="e" /> 
+        <dep id="com.projectcocoon.p2p.managers:ObjectManager" type="e" /> 
+        <dep id="flash.utils:Timer" type="e" /> 
+        <dep id="flash.events:TimerEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.command:CommandType" type="e" /> 
+        <dep id="flash.events:AccelerometerEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:ClientEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.vo:ObjectMetadataVO" type="e" /> 
+        <dep id="flash.net:NetConnection" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:AccelerationEvent" type="e" /> 
+        <dep id="flash.events:NetStatusEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.managers:GroupManager" type="e" /> 
+        <dep id="flash.net:NetGroup" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:AccelerationVO" type="s" /> 
+        <dep id="com.projectcocoon.p2p.events:GroupEvent" type="s" /> 
+        <dep id="flash.sensors:Accelerometer" type="s" /> 
+        <dep id="com.projectcocoon.p2p.events:ObjectEvent" type="s" /> 
+        <dep id="com.projectcocoon.p2p.events:MessageEvent" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="s" /> 
+        <dep id="__AS3__.vec:Vector" type="s" /> 
+        <dep id="com.projectcocoon.p2p.managers:ObjectManager" type="s" /> 
+        <dep id="flash.utils:Timer" type="s" /> 
+        <dep id="flash.events:TimerEvent" type="s" /> 
+        <dep id="flash.events:AccelerometerEvent" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:MessageVO" type="s" /> 
+        <dep id="com.projectcocoon.p2p.events:ClientEvent" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:ObjectMetadataVO" type="s" /> 
+        <dep id="flash.net:NetConnection" type="s" /> 
+        <dep id="flash.events:NetStatusEvent" type="s" /> 
+        <dep id="com.projectcocoon.p2p.managers:GroupManager" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="flash.events:EventDispatcher" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/util/SerializationUtil" mod="1346551075000" signatureChecksum="1996111459" >
+        <def id="com.projectcocoon.p2p.util:SerializationUtil" /> 
+        <dep id="flash.utils:ByteArray" type="e" /> 
+        <dep id="Error" type="e" /> 
+        <dep id="flash.utils:ByteArray" type="s" /> 
+        <dep id="Error" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="ru/nekit/ane/P2PConnectionEntry" mod="1346600763000" signatureChecksum="23558075" >
+        <def id="ru.nekit.ane:P2PConnectionEntry" /> 
+        <dep id="trace" type="e" /> 
+        <dep id="com.projectcocoon.p2p:LocalNetworkDiscovery" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:ClientEvent" type="e" /> 
+        <dep id="com.projectcocoon.p2p.events:GroupEvent" type="e" /> 
+        <dep id="ru.nekit.ane:JAIRBridge" type="s" /> 
+        <dep id="com.projectcocoon.p2p:LocalNetworkDiscovery" type="s" /> 
+        <dep id="com.projectcocoon.p2p.events:ClientEvent" type="s" /> 
+        <dep id="com.projectcocoon.p2p.events:GroupEvent" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/command/CommandType" mod="1346551075000" signatureChecksum="56963073" >
+        <def id="com.projectcocoon.p2p.command:CommandType" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
+      <script name="com/projectcocoon/p2p/vo/MessageVO" mod="1346551075000" signatureChecksum="1931181361" >
+        <def id="com.projectcocoon.p2p.vo:MessageVO" /> 
+        <dep id="Date" type="e" /> 
+        <dep id="Date" type="s" /> 
+        <dep id="com.projectcocoon.p2p.vo:ClientVO" type="s" /> 
+        <dep id="AS3" type="n" /> 
+        <dep id="Object" type="i" /> 
+      </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="84371e0b194868a550da074b2e3d35cb3eddd34b2f34a49e286846852cdd6733"   />
+        <digest type="SHA-256" signed="false" value="3f888975f39a075eff1b45beed02e85d46280ac5951051d1844ac867391d9498"   />
       </digests>
     </library>
   </libraries>

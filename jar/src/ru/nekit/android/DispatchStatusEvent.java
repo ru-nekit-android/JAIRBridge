@@ -35,10 +35,10 @@ public class DispatchStatusEvent implements FREFunction {
 		{
 			arguments[i] = args[i+1];
 		}
-		List<IJAIREventReceivable> list = context.getReceiverList();
-		for( IJAIREventReceivable receiver : list )
+		List<IJAIRStatusEventReceivable> list = context.getStatusEventReceiverList();
+		for( IJAIRStatusEventReceivable receiver : list )
 		{
-			receiver.onEventReceive(name, arguments);
+			receiver.onStatusEventReceive(name, arguments);
 		}
 		return null;
 	}

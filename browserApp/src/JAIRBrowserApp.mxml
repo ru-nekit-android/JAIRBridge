@@ -1,10 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
 			   xmlns:s="library://ns.adobe.com/flex/spark" 
-			   xmlns:mx="library://ns.adobe.com/flex/mx">
-	<fx:Declarations>
-		
-		
-		
-	</fx:Declarations>
+			   xmlns:mx="library://ns.adobe.com/flex/mx" 
+			   creationComplete="creationCompleteHandler(event)" 
+			   height="100%">
+	
+	<fx:Script>
+		<![CDATA[
+			
+			import com.projectcocoon.p2p.LocalNetworkDiscovery;
+			import com.projectcocoon.p2p.events.ClientEvent;
+			import com.projectcocoon.p2p.events.GroupEvent;
+			
+			import mx.events.FlexEvent;
+			
+			private static var p2p:LocalNetworkDiscovery;
+			private var connected:Boolean = false;
+			
+			private function creationCompleteHandler(event:FlexEvent):void
+			{
+				log("Startup...");
+			}
+			
+			private function groupConnectedHandler(event:GroupEvent):void
+			{
+				log("P2P client connect to group");
+			}
+			
+			private function clientUpdateHandler(event:ClientEvent):void
+			{
+				log("P2P client update: " + event.client.clientName);
+			}
+			
+			private function clientRemoveHandler(event:ClientEvent):void
+			{
+				log("P2P client removed: " + event.client.clientName);
+			}
+			
+			private function groupClosedHandler(event:GroupEvent):void
+			{
+				log("P2P group cloused...");
+			}
+			
+			private function clientAddedHandler(event:ClientEvent):void
+			{
+				if( event.client.isLocal )
+				{
+					log("Local P2P client added: " + event.client.peerID);
+					p2pConnectButton.enabled = true;
+					p2pConnectButton.label = "Disconnect";
+				}else{
+					log("P2P client added: " + event.client.peerID);
+				}
+			}
+			
+			private function log(value:String):void
+			{
+				statusValue.appendText(value + "\n");
+			}
+			
+			private function p2pConnectClickHandler(event:MouseEvent):void
+			{
+				if( !p2p )
+				{
+					p2p = new LocalNetworkDiscovery;
+					p2p.autoConnect = false;
+				}
+				else
+				{
+					p2p.close();
+				}
+				connected = !connected;
+				if( connected )
+				{
+					p2p.clientName = "web";
+					p2p.key = "fa34a2a9cd8864b67cdb154d-ac8a93ff4df0";
+					p2p.useCirrus = true;
+					var groupName:String = "ru.nekit.p2p.group_" + (keyValue.text != "" ? keyValue.text : "none");
+					p2p.groupName = groupName;
+					log("P2P channel set group name: " + groupName);
+					p2p.addEventListener(ClientEvent.CLIENT_ADDED, clientAddedHandler);
+					p2p.addEventListener(ClientEvent.CLIENT_UPDATE, clientUpdateHandler);
+					p2p.addEventListener(ClientEvent.CLIENT_REMOVED, clientRemoveHandler);
+					p2p.addEventListener(GroupEvent.GROUP_CONNECTED, groupConnectedHandler);
+					p2p.addEventListener(GroupEvent.GROUP_CLOSED, groupClosedHandler);
+					p2p.connect();
+					log("Local P2P client init connection");
+					p2pConnectButton.enabled = false;
+					p2pConnectButton.label = "Connection..."
+				}
+				else
+				{
+					p2pConnectButton.label = "Connect";
+					log("Local P2P client disconnected");
+				}
+			}
+			
+			private function statusClearClickHandler(event:MouseEvent):void
+			{
+				statusValue.text = "";
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<s:layout>
+		<s:VerticalLayout  paddingRight="20" paddingLeft="20" paddingTop="40" gap="20" paddingBottom="20"/>
+	</s:layout>
+	
+	<s:Label textAlign="center" width="100%" text="JAIRBridge Browser App" fontSize="24"/>
+	<s:HGroup width="100%" height="100%">
+		<s:VGroup width="25%" height="100%">
+			<s:Label text="Status"/>
+			<s:TextArea height="100%" focusEnabled="false" editable="false" id="statusValue" width="100%"/>
+			<s:Button label="Clear" click="statusClearClickHandler(event)" width="100%"/>
+		</s:VGroup>
+		<s:VGroup width="50%">
+			
+		</s:VGroup>
+		<s:VGroup width="25%">
+			<s:TextInput width="100%" id="keyValue" prompt="none"/>
+			<s:Button label="Connect" width="100%" id="p2pConnectButton" click="p2pConnectClickHandler(event)"/>
+		</s:VGroup>
+	</s:HGroup>
+	
 </s:Application>

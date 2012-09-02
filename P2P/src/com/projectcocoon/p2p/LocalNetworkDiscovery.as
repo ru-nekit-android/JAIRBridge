@@ -332,6 +332,11 @@ package com.projectcocoon.p2p
 			return 0;
 		}
 		
+		public function get group():NetGroup
+		{
+			return _group;
+		}
+		
 		CONFIG::FLEX
 		{
 				
@@ -613,7 +618,10 @@ package com.projectcocoon.p2p
 			}
 			
 			if (_group)
+			{
+				_group.close();
 				_group = null;
+			}
 			
 			if (_localClient)
 				_localClient = null;

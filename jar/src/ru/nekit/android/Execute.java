@@ -1,7 +1,5 @@
 package ru.nekit.android;
 
-import android.content.Intent;
-
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREInvalidObjectException;
@@ -9,16 +7,17 @@ import com.adobe.fre.FREObject;
 import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
 
-public class StartUp implements FREFunction {
+public class Execute implements FREFunction {
 
 	private JAIRBridgeContext context;
-
-	public FREObject call(FREContext _context, FREObject[] arg)
+	
+	@Override
+	public FREObject call(FREContext _context, FREObject[] args) 
 	{
 		context = (JAIRBridgeContext)_context;
-		boolean backgroud = true;
+		String name = null;
 		try {
-			backgroud = arg[0].getAsBool();
+			name = args[0].getAsString();
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (FRETypeMismatchException e) {
@@ -28,16 +27,8 @@ public class StartUp implements FREFunction {
 		} catch (FREWrongThreadException e) {
 			e.printStackTrace();
 		}
-		if( backgroud )
-		{
-			context.getActivity().moveTaskToBack(true);
-		}
-		
-		Intent intent = new Intent(context.getActivity(), StartUpActivity.class); 
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		context.getActivity().startActivity(intent);
-		context.sturtUp();
-		context = null;
+		context.execute(name);
 		return null;
 	}
+
 }
