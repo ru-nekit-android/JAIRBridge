@@ -35,7 +35,7 @@
 					<activity
 						android:excludeFromRecents="false" 
 						android:alwaysRetainTaskState="true" 
-						
+						android:launchMode="singleInstance"
 						>
 						<intent-filter> 
 							<action android:name="android.intent.action.MAIN" /> 
@@ -62,12 +62,7 @@
 		]]></manifestAdditions>
 	</android>
 
-	
-
-
-
-
-<extensions>
+	<extensions>
         <extensionID>ru.nekit.android.JAIRBridge</extensionID>
     </extensions>
 </application>

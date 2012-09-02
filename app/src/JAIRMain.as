@@ -15,10 +15,10 @@ package
 		public function JAIRMain()
 		{
 			super();
-			setTimeout(function():void
+			/*setTimeout(function():void
 			{
 				startUp(false);
-			}, 1900);
+			}, 4900);*/
 		}
 		
 		override public function onStartUp():void
@@ -41,7 +41,7 @@ package
 		{
 			if( item.isBitmapData )
 			{
-				var bmp:Bitmap = new Bitmap(BitmapData(item.value));
+				var bmp:Bitmap = new Bitmap(item.value as BitmapData);
 				addChild(bmp);
 			}
 			else
