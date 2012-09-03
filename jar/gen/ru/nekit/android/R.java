@@ -830,14 +830,17 @@ containing a value of this type.
         public static final int abs__titleDivider=0x7f05001c;
         public static final int abs__up=0x7f05000b;
         public static final int button=0x7f050028;
+        public static final int connect=0x7f05002c;
         public static final int disableHome=0x7f050009;
         public static final int editText=0x7f050027;
         public static final int homeAsUp=0x7f050006;
         public static final int listMode=0x7f050002;
+        public static final int name=0x7f05002a;
         public static final int normal=0x7f050001;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
+        public static final int suffix=0x7f05002b;
         public static final int tabMode=0x7f050003;
         public static final int useLogo=0x7f050004;
         public static final int webView=0x7f050029;
@@ -869,8 +872,9 @@ containing a value of this type.
         public static final int abs__screen_simple_overlay_action_mode=0x7f030013;
         public static final int activity_next=0x7f030014;
         public static final int activity_start_up=0x7f030015;
-        public static final int sherlock_spinner_dropdown_item=0x7f030016;
-        public static final int sherlock_spinner_item=0x7f030017;
+        public static final int activity_user_list=0x7f030016;
+        public static final int sherlock_spinner_dropdown_item=0x7f030017;
+        public static final int sherlock_spinner_item=0x7f030018;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -904,8 +908,8 @@ containing a value of this type.
          */
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0009;
         public static final int app_name=0x7f0a000b;
+        public static final int connect=0x7f0a000c;
         public static final int hello=0x7f0a000a;
-        public static final int next=0x7f0a000c;
         public static final int send=0x7f0a000d;
     }
     public static final class style {

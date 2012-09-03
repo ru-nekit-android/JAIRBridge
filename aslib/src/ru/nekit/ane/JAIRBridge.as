@@ -116,9 +116,9 @@ package ru.nekit.ane
 			return context.call("getPublishValue", item.id);
 		}
 		
-		public function startUp(backgraund:Boolean = true):void
+		public function startUp(backgraund:Boolean = true, root:Boolean = true, newTask:Boolean = true, waitingResult:Boolean = false):void
 		{
-			context.call("startUp", backgraund);
+			context.call("startUp", backgraund, root, newTask, waitingResult);
 		}
 	}
 }

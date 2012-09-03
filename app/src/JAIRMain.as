@@ -15,7 +15,7 @@ package
 			super();
 			setTimeout(function():void
 			{
-				startUp(true);
+				startUp(true, true, true, true);
 			}, 1);
 		}
 		

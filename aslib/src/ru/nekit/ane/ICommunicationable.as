@@ -11,7 +11,7 @@ package ru.nekit.ane
 		function onError(error:String):void;
 		function getPublishValue(item:PublishItem):Object;
 		function dispatchStatusEvent(name:String, ... args):void
-		function startUp(backgraund:Boolean = true):void
+		function startUp(backgraund:Boolean = true, root:Boolean = true, newTask:Boolean = true, waitingResult:Boolean = false):void
 		function get version():String;
 		
 	}

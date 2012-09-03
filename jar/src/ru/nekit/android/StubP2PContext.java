@@ -4,6 +4,7 @@ import android.content.Context;
 
 public class StubP2PContext implements IP2P {
 
+	@SuppressWarnings("unused")
 	private Context context;
 	
 	public StubP2PContext(Context context)

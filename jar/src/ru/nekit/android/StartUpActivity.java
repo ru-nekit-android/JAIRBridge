@@ -5,28 +5,34 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.adobe.fre.FREObject;
 
-public class StartUpActivity extends SherlockFREContextActivity implements OnClickListener, IP2PStatusEventReceivable {
+public class StartUpActivity extends SherlockJAIRContextActivity implements OnClickListener, IP2PStatusEventReceivable {
 
-	public Button next;
+	private Button connect;
+	private EditText suffix;
+	private EditText name;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(getResourceId("layout.activity_start_up"));
-		next = (Button)findViewById(getResourceId("id.button"));
-		next.setOnClickListener(this);
+		connect = (Button)findViewById(getResourceId("id.connect"));
+		connect.setOnClickListener(this);
+		suffix = (EditText)findViewById(getResourceId("id.suffix"));
+		name = (EditText)findViewById(getResourceId("id.name"));
+		suffix.setHint("none");
+		name.setHint("mobile");
 		registerP2PStatuEventReceiver(this);
 	}
 
 	@Override
 	public void onClick(View v)
 	{
-		dispatchServiceEvent("CLICK");
-		connectP2P("none");
+		connectP2P(suffix.getText().toString());
 	}
 	
 	@Override
@@ -41,9 +47,8 @@ public class StartUpActivity extends SherlockFREContextActivity implements OnCli
 	{
 		if( name.equals(JAIRBridgeContext.CONNECT_P2P) )
 		{
-			Intent intent = new Intent(StartUpActivity.this, NextActivity.class);
+			Intent intent = new Intent(StartUpActivity.this, UserListActivity.class);
 			startActivity(intent);
 		}
-
 	}
 }

@@ -2,17 +2,17 @@ package ru.nekit.android;
 
 import android.view.View;
 
-import com.actionbarsherlock.app.SherlockActivity;
+import com.actionbarsherlock.app.SherlockListActivity;
 
-public class SherlockFREContextActivity extends SherlockActivity implements IJAIR, IP2P {
+public class SherlockJAIRContextListActivity extends SherlockListActivity implements IJAIR, IP2P {
 
 	protected IJAIR context;
 	protected IP2P p2pContext;
 
-	public SherlockFREContextActivity()
+	public SherlockJAIRContextListActivity()
 	{
 		super();
-		if( CONFIG.USE_REVERSE_BRIDGE )
+		if( CONFIG.USE_JAIR )
 		{
 			context = JAIRBridgeContext.getInstance();
 			p2pContext = JAIRBridgeContext.getInstance();

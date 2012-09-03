@@ -14,7 +14,7 @@ import com.adobe.fre.FREObject;
 import com.adobe.fre.FRETypeMismatchException;
 import com.adobe.fre.FREWrongThreadException;
 
-public class NextActivity extends SherlockFREContextActivity implements OnClickListener, IJAIRStatusEventReceivable {
+public class NextActivity extends SherlockJAIRContextActivity implements OnClickListener, IJAIRStatusEventReceivable {
 
 	private Button call;
 	private EditText editText;

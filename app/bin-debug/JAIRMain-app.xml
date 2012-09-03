@@ -10,8 +10,8 @@
 	<description>Reverse bridge Android - Air</description>
 	<initialWindow>
 		<content>JAIRMain.swf</content>
-		<systemChrome>none</systemChrome>
-		<transparent>true</transparent>
+		<systemChrome>standard</systemChrome>
+		<transparent>false</transparent>
 		<visible>false</visible>
 		<minimizable>true</minimizable>
 		<maximizable>false</maximizable>
@@ -35,7 +35,9 @@
 					<activity
 						android:excludeFromRecents="false" 
 						android:alwaysRetainTaskState="true" 
-						android:launchMode="singleInstance"
+						
+						android:largeHeap="true"
+						
 						>
 						<intent-filter> 
 							<action android:name="android.intent.action.MAIN" /> 
@@ -45,17 +47,21 @@
 									
 				    <activity android:name="ru.nekit.android.StartUpActivity"
 				    	android:excludeFromRecents="false" 
-				    	android:screenOrientation="portrait"
-				    	android:alwaysRetainTaskState="true"
-				    	
-	    				android:configChanges="orientation|keyboardHidden|keyboard"
-				    	>			
+				    	android:screenOrientation="portrait"		
+				    	android:alwaysRetainTaskState="true"		    	
+	    				android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+						android:launchMode="singleInstance"
+				    	>	
+				    	<intent-filter> 
+							<action android:name="android.intent.action.MAIN" /> 
+							<category android:name="android.intent.category.LAUNCHER"/> 
+						</intent-filter> 		
 				    </activity>
 				    
-				    <activity android:name="ru.nekit.android.NextActivity" 
+				    <activity android:name="ru.nekit.android.UserListActivity"
 				    	android:excludeFromRecents="false"
 				    	android:screenOrientation="portrait"
-	    				android:configChanges="orientation|keyboardHidden|keyboard" 
+	    				android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" 
 				     	> 				
 					</activity>
 			
@@ -63,51 +69,6 @@
 			</manifest>		
 		]]></manifestAdditions>
 	</android>
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <extensions>
         <extensionID>ru.nekit.android.JAIRBridge</extensionID>

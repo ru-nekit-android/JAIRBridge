@@ -22,6 +22,7 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 	private static final String LEVEL_SERVICE = "ru.nekit.service";
 	private static final String LEVEL_PUBLISH = "ru.nekit.publish";
 	private static final String LEVEL_EXECUTE = "ru.nekit.execute";
+	@SuppressWarnings("unused")
 	private static final String LEVEL_P2P = "ru.nekit.p2p";
 
 	private static final String STARTUP = "startup";
@@ -31,7 +32,7 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 	private Map<String, Object> publishMap;
 	private List<IJAIRStatusEventReceivable> statusEventListReceiver;
 	private List<IP2PStatusEventReceivable> p2pStatusEventReceiverList;
-	private static HashMap<String, ArrayList<Item>> executeList;
+	private Map<String, ArrayList<Item>> executeList;
 
 	private JAIRBridgeContext()
 	{
@@ -73,15 +74,38 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 	@Override
 	public Map<String, FREFunction> getFunctions() 
 	{
-		Map<String, FREFunction> map = 	new HashMap<String, FREFunction>();
-		map.put("test", 				new Test());
-		map.put("startUp", 				new StartUp());
-		map.put("version", 				new Version());
-		map.put("execute", 				new Execute());
-		map.put("getPublishValue", 		new GetPublishValue());
-		map.put("dispatchStatusEvent", 	new DispatchStatusEvent());
+		Map<String, FREFunction> map = 		new HashMap<String, FREFunction>();
+		map.put("test", 					new Test());
+		map.put("startUp", 					new StartUp());
+		map.put("version", 					new Version());
+		map.put("execute", 					new Execute());
+		map.put("getPublishValue", 			new GetPublishValue());
+		map.put("dispatchStatusEvent", 		new DispatchStatusEvent());
 		map.put("dispatchP2PStatusEvent", 	new DispatchP2PStatusEvent());
 		return map;
+	}
+
+	private static class Execute implements FREFunction {
+
+		@Override
+		public FREObject call(FREContext _context, FREObject[] args) 
+		{
+			String name = null;
+			try {
+				name = args[0].getAsString();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (FRETypeMismatchException e) {
+				e.printStackTrace();
+			} catch (FREInvalidObjectException e) {
+				e.printStackTrace();
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+			JAIRBridgeContext.context.execute(name);
+			return null;
+		}
+
 	}
 
 	private static class Version implements FREFunction {
@@ -237,7 +261,6 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 		} catch (FREWrongThreadException e) {
 			e.printStackTrace();
 		}
-		dispatchServiceEvent("end");
 	}
 
 	@Override
@@ -258,7 +281,6 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 			this.type = type;
 			this.value = value;
 		}
-
 	}
 
 	@Override
