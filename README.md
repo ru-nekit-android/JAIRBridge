@@ -13,7 +13,7 @@
 	</tr>
 <tr>
     <td><img src="https://raw.github.com/ru-nekit-android/JAIRBridge/master/screenshots/3.png"/></td>
-<td>Connectd. No any p2p clients yet</td>
+<td>Connected to created p2p group. No any p2p clients yet</td>
 	</tr>
 <tr>
     <td><img src="https://raw.github.com/ru-nekit-android/JAIRBridge/master/screenshots/4.png"/></td>
