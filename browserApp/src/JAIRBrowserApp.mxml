@@ -73,7 +73,7 @@
 				connected = !connected;
 				if( connected )
 				{
-					p2p.clientName = (( nameValue.text == "" ||  nameValue.text == null ) ? "web" : keyValue.text);
+					p2p.clientName = (( nameValue.text == "" ||  nameValue.text == null ) ? "web" : nameValue.text);
 					p2p.key = "fa34a2a9cd8864b67cdb154d-ac8a93ff4df0";
 					p2p.useCirrus = true;
 					var groupName:String = "ru.nekit.p2p.group_" + (( keyValue.text == "" || keyValue.text == null ) ? "none" : keyValue.text);
