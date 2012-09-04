@@ -7,12 +7,12 @@
     android:paddingLeft="10dip"
     android:paddingRight="10dip" >
 
-    <EditText
-        android:id="@+id/name"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10" 
-        android:inputType="text"/>
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:text="@string/invite_key" />
 
     <EditText
         android:id="@+id/suffix"
@@ -26,9 +26,9 @@
 
     <Button
         android:id="@+id/connect"
-        android:gravity="left|center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
         android:text="@string/connect" />
 
 </LinearLayout>

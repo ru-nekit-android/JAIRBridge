@@ -3,6 +3,7 @@
   <includeClasses>
     <classEntry path="ru.nekit.ane.PublishItem"/>
     <classEntry path="ru.nekit.ane.P2PConnectionEntry"/>
+    <classEntry path="ru.nekit.ane.IP2P"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>

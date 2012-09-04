@@ -1,11 +1,13 @@
 package ru.nekit.ane
 {
 	
+	import com.projectcocoon.p2p.LocalNetworkDiscovery;
+	
 	import flash.display.Sprite;
 	import flash.events.StatusEvent;
 	import flash.external.ExtensionContext;
 	
-	public  class JAIRBridge extends Sprite implements ICommunicationable
+	public  class JAIRBridge extends Sprite implements IJAIRBridge
 	{
 		
 		public static const LEVEL_ERROR:String 		= "ru.nekit.error";
@@ -21,10 +23,10 @@ package ru.nekit.ane
 		
 		public function JAIRBridge()
 		{
+			LocalNetworkDiscovery;
 			context = ExtensionContext.createExtensionContext("ru.nekit.android.JAIRBridge", null);
 			context.addEventListener(StatusEvent.STATUS, _onStatus); 
 			PublishItem.context = this;
-			P2PConnectionEntry.context = this;
 			super();
 		}	
 		

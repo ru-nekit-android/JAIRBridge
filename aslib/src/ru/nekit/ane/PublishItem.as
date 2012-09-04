@@ -8,7 +8,7 @@ package ru.nekit.ane
 	public class PublishItem
 	{
 		
-		public static var context:ICommunicationable;
+		public static var context:IJAIRBridge;
 		public var name:String;
 		public var type:String;
 		private var _value:Object;
@@ -33,7 +33,7 @@ package ru.nekit.ane
 		
 		public function get isBitmapData():Boolean
 		{
-			return type == "view::bitmapData";
+			return type.indexOf("bitmapData") == 0;
 		}
 		
 		public function destroy():void

@@ -5,8 +5,8 @@
 		<platform name="Android-ARM">
 			<applicationDeployment>
 				<nativeLibrary>JAIRBridge.jar</nativeLibrary>
-				<initializer>ru.nekit.android.JAIRBridgeExtension</initializer>
-				<finalizer>ru.nekit.android.JAIRBridgeExtension</finalizer>
+				<initializer>ru.nekit.android.core.JAIRBridgeExtension</initializer>
+				<finalizer>ru.nekit.android.core.JAIRBridgeExtension</finalizer>
 			</applicationDeployment>
 		</platform>
 	</platforms>
