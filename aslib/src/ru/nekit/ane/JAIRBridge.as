@@ -105,12 +105,12 @@ package ru.nekit.ane
 		
 		public function dispatchStatusEvent(name:String, ... args):void
 		{
-			context.call.apply(null, ["dispatchStatusEvent", name].concat(args));
+			context.call.apply(null, ["dispatchEvent", "status", name].concat(args));
 		}
 		
 		public function dispatchP2PStatusEvent(name:String, ... args):void
 		{
-			context.call.apply(null, ["dispatchP2PStatusEvent", name].concat(args));
+			context.call.apply(null, ["dispatchEvent", "p2p", name].concat(args));
 		}
 		
 		public function getPublishValue(item:PublishItem):Object

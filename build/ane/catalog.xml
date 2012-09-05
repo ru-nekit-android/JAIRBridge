@@ -21,7 +21,7 @@
         <dep id="AS3" type="n" /> 
         <dep id="Object" type="i" /> 
       </script>
-      <script name="_e2a7561fa530840df816b809cd0f7bf34a91b004d10d70d9333c79654abda231_flash_display_Sprite" mod="1346684437810" signatureChecksum="3960437155" >
+      <script name="_e2a7561fa530840df816b809cd0f7bf34a91b004d10d70d9333c79654abda231_flash_display_Sprite" mod="1346830669656" signatureChecksum="3960437155" >
         <def id="_e2a7561fa530840df816b809cd0f7bf34a91b004d10d70d9333c79654abda231_flash_display_Sprite" /> 
         <dep id="flash.system:Security" type="e" /> 
         <dep id="AS3" type="n" /> 
@@ -166,7 +166,7 @@
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:Event" type="i" /> 
       </script>
-      <script name="ru/nekit/ane/JAIRBridge" mod="1346677646000" signatureChecksum="2098334993" >
+      <script name="ru/nekit/ane/JAIRBridge" mod="1346828653000" signatureChecksum="2098334993" >
         <def id="ru.nekit.ane:JAIRBridge" /> 
         <dep id="ru.nekit.ane:PublishItem" type="e" /> 
         <dep id="com.projectcocoon.p2p:LocalNetworkDiscovery" type="e" /> 
@@ -191,7 +191,7 @@
         <dep id="AS3" type="n" /> 
         <dep id="flash.events:Event" type="i" /> 
       </script>
-      <script name="com/projectcocoon/p2p/LocalNetworkDiscovery" mod="1346561145000" signatureChecksum="711001972" >
+      <script name="com/projectcocoon/p2p/LocalNetworkDiscovery" mod="1346830661000" signatureChecksum="711001972" >
         <def id="com.projectcocoon.p2p:LocalNetworkDiscovery" /> 
         <dep id="flash.events:Event" type="e" /> 
         <dep id="com.projectcocoon.p2p.command:CommandList" type="e" /> 
@@ -267,7 +267,7 @@
         <dep id="Object" type="i" /> 
       </script>
       <digests>
-        <digest type="SHA-256" signed="false" value="30cafbe89a9ec990a3f67fe0cb8bc1a8f2b1c55e5f18ef9534fc326908b3511f"   />
+        <digest type="SHA-256" signed="false" value="b61512f33d005b9e5606bedcfee3c56b6a177659cd3d1a4fb421980ea052406c"   />
       </digests>
     </library>
   </libraries>

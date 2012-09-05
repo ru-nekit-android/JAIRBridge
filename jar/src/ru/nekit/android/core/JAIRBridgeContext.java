@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ru.nekit.android.core.functions.DispatchP2PStatusEvent;
-import ru.nekit.android.core.functions.DispatchStatusEvent;
+import ru.nekit.android.core.functions.DispatchEvent;
 import ru.nekit.android.core.functions.GetPublishValue;
 import ru.nekit.android.core.functions.StartUp;
 import ru.nekit.android.core.functions.Test;
@@ -93,8 +92,7 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 		map.put("version", 					new Version());
 		map.put("execute", 					new Execute());
 		map.put("getPublishValue", 			new GetPublishValue());
-		map.put("dispatchStatusEvent", 		new DispatchStatusEvent());
-		map.put("dispatchP2PStatusEvent", 	new DispatchP2PStatusEvent());
+		map.put("dispatchEvent", 			new DispatchEvent());
 		return map;
 	}
 

@@ -22,7 +22,7 @@ public class GetPublishValue implements FREFunction {
 	private JAIRBridgeContext context;
 
 	@Override
-	public FREObject call(FREContext _context, FREObject[] args) 
+	public FREObject call(FREContext mContext, FREObject[] args) 
 	{
 		String id = null;
 		try {
@@ -37,7 +37,7 @@ public class GetPublishValue implements FREFunction {
 			e.printStackTrace();
 		}
 		String type = id.split("\\.")[0];
-		context = (JAIRBridgeContext)_context;
+		context = (JAIRBridgeContext)mContext;
 		if( id != null )
 		{
 			if( context.getPublishMap().containsKey(id) )

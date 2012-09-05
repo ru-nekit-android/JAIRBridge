@@ -17,9 +17,9 @@ public class StartUp implements FREFunction {
 
 	private JAIRBridgeContext context;
 
-	public FREObject call(FREContext _context, FREObject[] arg)
+	public FREObject call(FREContext mContext, FREObject[] arg)
 	{
-		context = (JAIRBridgeContext)_context;
+		context = (JAIRBridgeContext)mContext;
 		boolean backgroud = true;
 		boolean newTask = true;
 		boolean waitingResult = true;

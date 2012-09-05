@@ -1,8 +1,13 @@
 package
 {
 	
+	import flash.desktop.NativeApplication;
+	import flash.desktop.SystemIdleMode;
 	import flash.display.BitmapData;
+	import flash.events.Event;
+	import flash.events.MouseEvent;
 	import flash.events.StatusEvent;
+	import flash.net.NetGroupReplicationStrategy;
 	import flash.utils.ByteArray;
 	import flash.utils.setTimeout;
 	
@@ -13,13 +18,43 @@ package
 	public class JAIRMain extends JAIRBridge
 	{
 		
+		private var activated:Boolean;
+		private var application:NativeApplication;
+		
 		public function JAIRMain()
 		{
 			super();
+			activated = true;
+			application = NativeApplication.nativeApplication;
+			application.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
+			application.autoExit = false;
+			application.executeInBackground = true;
 			setTimeout(function():void
 			{
-				startUp(true, true, false, false);
+				startUp(true, true, true, false);
 			}, 1);
+			stage.addEventListener(MouseEvent.CLICK ,clickHandler);
+			addEventListener(Event.ACTIVATE, activateHandler);
+			addEventListener(Event.DEACTIVATE, deactivateHandler);
+		}
+		
+		private function deactivateHandler(event:Event):void
+		{
+			activated = false;
+		}
+		
+		private function activateHandler(event:Event):void
+		{
+			if( !activated )
+			{
+				startUp(false, true, true, false);	
+			}
+			trace(0);		
+		}
+		
+		private function clickHandler(event:MouseEvent):void
+		{
+			trace(0);
 		}
 		
 		override public function onStartUp():void

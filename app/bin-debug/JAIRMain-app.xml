@@ -36,25 +36,21 @@
 					<activity
 						android:excludeFromRecents="false" 
 						android:alwaysRetainTaskState="true" 
-						android:launchMode="singleInstance"
+						android:launchMode="singleInstance" 
 						android:largeHeap="true"
 						>
 						<intent-filter> 
 							<action android:name="android.intent.action.MAIN" /> 
 							<category android:name="android.intent.category.LAUNCHER"/> 
 						</intent-filter> 
-					</activity> 
+					</activity>
 									
 				    <activity android:name="ru.nekit.android.activity.StartUpActivity"
 				    	android:excludeFromRecents="false" 
 				    	android:screenOrientation="portrait"		
-				    	android:alwaysRetainTaskState="true"		    	
+				    	android:alwaysRetainTaskState="true"  		
 	    				android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"		
-				    	>	
-				    	<intent-filter> 
-							<action android:name="android.intent.action.MAIN" /> 
-							<category android:name="android.intent.category.LAUNCHER"/> 
-						</intent-filter> 		
+				    	>
 				    </activity>
 				    
 				    <activity android:name="ru.nekit.android.activity.ClientListActivity"
@@ -77,6 +73,9 @@
 	</android>
 
 	
+
+
+
 
 
 
