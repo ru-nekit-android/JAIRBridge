@@ -5,11 +5,11 @@ package
 	import flash.desktop.SystemIdleMode;
 	import flash.display.BitmapData;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
 	import flash.events.StatusEvent;
-	import flash.net.NetGroupReplicationStrategy;
+	import flash.ui.Keyboard;
 	import flash.utils.ByteArray;
-	import flash.utils.setTimeout;
 	
 	import ru.nekit.ane.JAIRBridge;
 	import ru.nekit.ane.P2PConnectionEntry;
@@ -18,53 +18,79 @@ package
 	public class JAIRMain extends JAIRBridge
 	{
 		
+		private var started:Boolean;
 		private var activated:Boolean;
 		private var application:NativeApplication;
 		
 		public function JAIRMain()
 		{
 			super();
-			activated = true;
+			activated = false;
+			started = false;
+			visible = false;
 			application = NativeApplication.nativeApplication;
 			application.systemIdleMode = SystemIdleMode.KEEP_AWAKE;
-			application.autoExit = false;
+			application.autoExit = true;
 			application.executeInBackground = true;
-			setTimeout(function():void
+			stage.addEventListener(MouseEvent.CLICK, clickHandler);
+			stage.addEventListener(KeyboardEvent.KEY_DOWN, keyDownHandler);
+			if( !started )
+			{	
+				startUp(false, false, true, true);
+				started = true;
+				stage.frameRate = 0.01;
+			}
+		}
+		
+		private function keyDownHandler(event:KeyboardEvent):void
+		{
+			if( event.keyCode == Keyboard.SEARCH )
 			{
-				startUp(true, true, true, false);
-			}, 1);
-			stage.addEventListener(MouseEvent.CLICK ,clickHandler);
-			addEventListener(Event.ACTIVATE, activateHandler);
-			addEventListener(Event.DEACTIVATE, deactivateHandler);
+				test();
+				restore();
+			}
 		}
 		
 		private function deactivateHandler(event:Event):void
 		{
 			activated = false;
+			trace("deactivate");
 		}
 		
 		private function activateHandler(event:Event):void
 		{
+			trace("activate");	
 			if( !activated )
 			{
-				startUp(false, true, true, false);	
-			}
-			trace(0);		
+				restore();
+				//moveToBack();
+				activated = true;
+			}	
 		}
 		
 		private function clickHandler(event:MouseEvent):void
 		{
-			trace(0);
+			
 		}
 		
 		override public function onStartUp():void
 		{
+			addEventListener(Event.ACTIVATE, activateHandler);
+			addEventListener(Event.DEACTIVATE, deactivateHandler);
 			P2P.instance.context = this;
 			P2PConnectionEntry.p2pConnection = P2P.instance;
 		}
 		
 		override public function onStatus(event:StatusEvent):void
 		{	
+			if( event.code == "ru.nekit.check" )
+			{
+				test();	
+			}
+			if( event.code == "onBackPressed" )
+			{
+				moveToBack();	
+			}
 			trace(event.code);
 		}
 		

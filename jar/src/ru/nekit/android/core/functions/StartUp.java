@@ -3,6 +3,7 @@ package ru.nekit.android.core.functions;
 import ru.nekit.android.activity.StartUpActivity;
 import ru.nekit.android.core.JAIRBridgeContext;
 import android.content.Intent;
+import android.util.Log;
 
 import com.adobe.fre.FREASErrorException;
 import com.adobe.fre.FREContext;
@@ -21,20 +22,14 @@ public class StartUp implements FREFunction {
 	{
 		context = (JAIRBridgeContext)mContext;
 		boolean backgroud = true;
+		boolean nonRoot = false;
 		boolean newTask = true;
 		boolean waitingResult = true;
 		Intent intent = new Intent(context.getActivity(), StartUpActivity.class); 
 		try {
 			backgroud = arg[0].getAsBool();
-			if( backgroud )
-			{
-				context.getActivity().moveTaskToBack(arg[1].getAsBool());
-			}
+			nonRoot =  arg[1].getAsBool();
 			newTask = arg[2].getAsBool();
-			if( newTask )
-			{
-				intent.setFlags( Intent.FLAG_ACTIVITY_NEW_TASK);
-			}
 			waitingResult = arg[3].getAsBool();
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
@@ -45,16 +40,25 @@ public class StartUp implements FREFunction {
 		} catch (FREWrongThreadException e) {
 			e.printStackTrace();
 		}
+		if( backgroud )
+		{
+			context.getActivity().moveTaskToBack(nonRoot);
+		}
+		if( newTask )
+		{
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		}
 		if( waitingResult )
 		{
 			context.getActivity().startActivityForResult(intent, -1);
 		}
 		else
 		{
+			Log.v("ru.nekit.jair", "jair::start activity on startUp");
 			context.getActivity().startActivity(intent);
 		}
 		try {
-			context.sturtUp();
+			context.sturtUp(context.getActivity());
 		} catch (IllegalStateException e) {
 			e.printStackTrace();
 		} catch (FRETypeMismatchException e) {

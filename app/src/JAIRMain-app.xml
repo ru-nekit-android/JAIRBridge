@@ -32,12 +32,11 @@
 					android:hardwareAccelerated="true"
         			android:theme="@style/AppTheme"
         			android:name="ru.nekit.android.core.JAIRApplication"
+        			android:largeHeap="true"
 					>
 					<activity
-						android:excludeFromRecents="false" 
-						android:alwaysRetainTaskState="true" 
-						android:launchMode="singleInstance" 
-						android:largeHeap="true"
+						android:excludeFromRecents="false"
+						android:launchMode="singleInstance"
 						>
 						<intent-filter> 
 							<action android:name="android.intent.action.MAIN" /> 
@@ -48,7 +47,7 @@
 				    <activity android:name="ru.nekit.android.activity.StartUpActivity"
 				    	android:excludeFromRecents="false" 
 				    	android:screenOrientation="portrait"		
-				    	android:alwaysRetainTaskState="true"  		
+				    	android:alwaysRetainTaskState="true"  	
 	    				android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"		
 				    	>
 				    </activity>
@@ -56,6 +55,7 @@
 				    <activity android:name="ru.nekit.android.activity.ClientListActivity"
 				    	android:excludeFromRecents="false"
 				    	android:screenOrientation="portrait"
+				    	android:alwaysRetainTaskState="true"	
 	    				android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize" 
 				     	> 				
 					</activity>
@@ -73,6 +73,11 @@
 	</android>
 
 	
+
+
+
+
+
 
 
 

@@ -4,6 +4,7 @@
     <string name="hello">Hello World!</string>
     <string name="app_name">ReverseBridge</string>
     <string name="connect">Connect</string>
+    <string name="destroy">Destroy</string>
     <string name="send">Send</string>
     <string name="invite_key">Invite key</string>
 

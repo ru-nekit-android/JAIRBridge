@@ -30,5 +30,12 @@
         android:layout_height="wrap_content"
         android:gravity="left|center_vertical"
         android:text="@string/connect" />
+    
+     <Button
+        android:id="@+id/destroy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left|center_vertical"
+        android:text="@string/destroy" />
 
 </LinearLayout>

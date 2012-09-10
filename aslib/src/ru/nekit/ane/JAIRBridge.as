@@ -98,9 +98,29 @@ package ru.nekit.ane
 			context.call("test");
 		}
 		
+		public function memoryReport():String
+		{
+			return context.call("memoryReport") as String;
+		}
+		
 		public function get version():String
 		{
 			return context.call("version") as String;
+		}
+
+		public function destroy():void
+		{
+			context.call("destroyBridge");
+		}
+		
+		public function restore():void
+		{
+			context.call("restoreBridge");
+		}
+		
+		public function moveToBack(nonRoot:Boolean = false):void
+		{
+			context.call("moveBridgeToBack", nonRoot);
 		}
 		
 		public function dispatchStatusEvent(name:String, ... args):void

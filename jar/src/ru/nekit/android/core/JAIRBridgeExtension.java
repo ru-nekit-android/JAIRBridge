@@ -9,7 +9,7 @@ public class JAIRBridgeExtension implements FREExtension {
 
 	public FREContext createContext(String name)
 	{
-		return context;
+		return context = JAIRBridgeContext.getInstance();
 	}
 
 	public void dispose() 
@@ -20,6 +20,5 @@ public class JAIRBridgeExtension implements FREExtension {
 
 	public void initialize()
 	{
-		context = JAIRBridgeContext.getInstance();
 	}
 }

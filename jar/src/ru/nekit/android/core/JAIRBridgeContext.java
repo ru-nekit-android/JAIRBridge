@@ -1,5 +1,6 @@
 package ru.nekit.android.core;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +15,12 @@ import ru.nekit.android.core.interfaces.IJAIREventReceivable;
 import ru.nekit.android.core.interfaces.IP2P;
 import ru.nekit.android.core.interfaces.IP2PEventReceivable;
 import ru.nekit.android.model.ClientProxy;
+import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences.Editor;
+import android.os.Debug;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -35,24 +42,44 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 	@SuppressWarnings("unused")
 	private static final String LEVEL_P2P = "ru.nekit.p2p";
 
-	private static final String STARTUP = "startup";
+	private static String CURRENT_ACTIVITY = "current_activity";
 
+	//event callback 
+	private static final String RESTART = "restart";
+	private static final String RESTORE = "restore";
+	private static final String STARTUP = "startup";
+	private static final String DESTROY = "destroy";
+	private static final String MOVE_TO_BACK = "move_to_back";
+	//p2p part
 	public static final String CONNECT_TO_GROUP = "connect_to_group";
 	public static final String CONNECT_CLIENT = "connect_client";
 
-	private static JAIRBridgeContext context;
+	private static JAIRBridgeContext instance;
+
+	public static String appEntryName;
+
 	private Map<String, Object> publishMap;
+
 	private List<IJAIREventReceivable> eventListReceiverList;
 	private List<IP2PEventReceivable> p2pEventReceiverList;
+
 	private Map<String, ArgList> executeList;
 
 	public static JAIRBridgeContext getInstance()
 	{
-		if( context == null )
+		if( instance == null )
 		{
-			context = new JAIRBridgeContext();
+			instance = new JAIRBridgeContext();
 		}
-		return context;
+		return instance;
+	}
+
+	public void setCurrentActivity(Activity activity)
+	{
+		Editor editor = PreferenceManager.getDefaultSharedPreferences(activity).edit();
+		editor.putString(CURRENT_ACTIVITY, 
+				activity != null ? activity.getComponentName().getClassName() : null);
+		editor.commit();
 	}
 
 	private JAIRBridgeContext()
@@ -93,7 +120,71 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 		map.put("execute", 					new Execute());
 		map.put("getPublishValue", 			new GetPublishValue());
 		map.put("dispatchEvent", 			new DispatchEvent());
+		map.put("destroyBridge", 			new DestroyBridge());
+		map.put("restoreBridge", 			new RestoreBridge());
+		map.put("moveBridgeToBack", 		new MoveBridgeToBack());
+		map.put("memoryReport", 			new MemoryReport());
 		return map;
+	}
+
+	private static class DestroyBridge implements FREFunction 
+	{
+
+		@Override
+		public FREObject call(FREContext _context, FREObject[] args) 
+		{
+			JAIRBridgeContext.instance.destroyBridge();
+			return null;
+		}
+	}
+
+	private static class MoveBridgeToBack implements FREFunction 
+	{
+
+		@Override
+		public FREObject call(FREContext _context, FREObject[] args) 
+		{
+			boolean nonRoot = false;
+			try {
+				nonRoot = args[0].getAsBool();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (FRETypeMismatchException e) {
+				e.printStackTrace();
+			} catch (FREInvalidObjectException e) {
+				e.printStackTrace();
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+			JAIRBridgeContext.instance.moveBridgeToBack(nonRoot);
+			return null;
+		}
+	}
+
+	private static class MemoryReport implements FREFunction 
+	{
+
+		@Override
+		public FREObject call(FREContext _context, FREObject[] args) 
+		{
+			try {
+				FREObject.newObject(JAIRBridgeContext.instance.memoryReport());
+			} catch (FREWrongThreadException e) {
+				e.printStackTrace();
+			}
+			return null;
+		}
+	}
+
+	private static class RestoreBridge implements FREFunction 
+	{
+
+		@Override
+		public FREObject call(FREContext _context, FREObject[] args) 
+		{
+			JAIRBridgeContext.instance.restoreBridge();
+			return null;
+		}
 	}
 
 	private static class Execute implements FREFunction {
@@ -113,7 +204,7 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 			} catch (FREWrongThreadException e) {
 				e.printStackTrace();
 			}
-			JAIRBridgeContext.context.execute(name);
+			JAIRBridgeContext.instance.execute(name);
 			return null;
 		}
 	}
@@ -124,13 +215,70 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 		{
 			FREObject version =  null;
 			try {
-				version = FREObject.newObject("0.1");
+				version = FREObject.newObject("0.84");
 			} catch (FREWrongThreadException e) 
 			{
-				JAIRBridgeContext.context.dispatchStatusEvent(LEVEL_ERROR, e.getMessage());
+				JAIRBridgeContext.instance.dispatchStatusEvent(LEVEL_ERROR, e.getMessage());
 			} 
 			return version;
 		}
+	}
+
+	@Override
+	public void destroyBridge()
+	{
+		Activity appEntry = getActivity();
+		if( appEntry != null )
+		{	
+			appEntry.finish();
+			System.gc();
+			dispatchServiceEvent(DESTROY);
+		}
+	}
+
+	private void moveBridgeToBack(boolean root)
+	{
+		Activity appEntry = getActivity();
+		if( appEntry != null )
+		{	
+			appEntry.moveTaskToBack(root);
+			dispatchServiceEvent(MOVE_TO_BACK);
+		}
+	}
+
+	private String memoryReport()
+	{
+		Double allocated = new Double(Debug.getNativeHeapAllocatedSize())/new Double((1048576));
+		Double available = new Double(Debug.getNativeHeapSize())/1048576.0;
+		Double free = new Double(Debug.getNativeHeapFreeSize())/1048576.0;
+		DecimalFormat df = new DecimalFormat();
+		df.setMaximumFractionDigits(2);
+		df.setMinimumFractionDigits(2); 
+		return df.format(allocated) + "MB of " + df.format(available) + "MB (" + df.format(free) + "MB free)\n"
+		+ "debug.memory: allocated: " + df.format(new Double(Runtime.getRuntime().totalMemory()/1048576)) + "MB of " + df.format(new Double(Runtime.getRuntime().maxMemory()/1048576))+ "MB (" + df.format(new Double(Runtime.getRuntime().freeMemory()/1048576)) +"MB free)";
+	}
+
+	private void restoreBridge()
+	{
+		String currentActivity =  PreferenceManager.getDefaultSharedPreferences(getActivity()).getString(CURRENT_ACTIVITY, null);
+		Log.d("ru.nekit.jair", "jair:Wait restore: " + currentActivity);
+		if( currentActivity != null )
+		{
+			Intent intent = new Intent();
+			intent.setClassName(getActivity(), currentActivity);
+			intent.setFlags(Intent.FLAG_FROM_BACKGROUND | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+			getActivity().startActivity(intent);
+			dispatchServiceEvent(RESTORE);
+			setCurrentActivity(null);
+		}else{
+
+		}
+	}
+
+	@Override
+	public void restartBridge()
+	{
+
 	}
 
 	public void dispatchServiceEvent(String description)
@@ -219,11 +367,21 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 		eventListReceiverList.clear();
 		p2pEventReceiverList.clear();
 		executeList.clear();
+		setCurrentActivity(null);
 	}
 
-	public void sturtUp() throws IllegalStateException, FRETypeMismatchException, FREInvalidObjectException, FREASErrorException, FRENoSuchNameException, FREWrongThreadException
+	public static String AEPN = "eapn";
+	public static String AECN = "eacn";
+
+	public void sturtUp(Activity appEntry) throws IllegalStateException, FRETypeMismatchException, FREInvalidObjectException, FREASErrorException, FRENoSuchNameException, FREWrongThreadException
 	{
-		dispatchServiceEvent(JAIRBridgeContext.STARTUP);	
+		appEntryName = appEntry.getComponentName().getClassName();
+		Editor e = PreferenceManager.getDefaultSharedPreferences(getActivity()).edit();
+		e.putString(AEPN, appEntry.getComponentName().getPackageName());
+		e.putString(AECN, appEntry.getComponentName().getClassName());
+		e.commit();
+		Log.d("ru.nekit.jair",  "startUp jair::"+appEntry);
+		dispatchServiceEvent(STARTUP);	
 		getP2PConnectionEntry().callMethod("init", null);
 	}
 
@@ -287,6 +445,12 @@ public class JAIRBridgeContext extends FREContext implements IJAIR, IP2P {
 	public void disconnect() 
 	{
 		execute("disconnect");	
+	}
+
+	@Override
+	public void check() 
+	{
+		dispatchServiceEvent("ru.nekit.check");
 	}
 
 	@Override

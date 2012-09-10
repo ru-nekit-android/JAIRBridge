@@ -2,6 +2,7 @@ package ru.nekit.android.core;
 
 import ru.nekit.android.core.interfaces.IJAIR;
 import ru.nekit.android.core.interfaces.IJAIREventReceivable;
+import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.webkit.WebView;
@@ -9,11 +10,17 @@ import android.webkit.WebView;
 public class StubJAIRBridgeContext implements IJAIR
 {
 
+	private static StubJAIRBridgeContext instance;
 	private Context context;
 
-	public StubJAIRBridgeContext(Context contxt)
+	public static StubJAIRBridgeContext getInstance(Context context)
 	{
-		this.context = contxt;
+		if( instance == null )
+		{
+			instance = new StubJAIRBridgeContext();
+			instance.context = context;
+		}
+		return instance;
 	}
 
 	@Override
@@ -86,7 +93,31 @@ public class StubJAIRBridgeContext implements IJAIR
 	@Override
 	public void publishValue(String name, WebView value) 
 	{
-		
+
+	}
+
+	@Override
+	public void setCurrentActivity(Activity activity) 
+	{
+
+	}
+
+	@Override
+	public void restartBridge() 
+	{
+
+	}
+
+	@Override
+	public void check() 
+	{
+
+	}
+
+	@Override
+	public void destroyBridge() 
+	{
+
 	}
 
 }

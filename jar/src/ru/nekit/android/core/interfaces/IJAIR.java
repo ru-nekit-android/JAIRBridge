@@ -1,5 +1,6 @@
 package ru.nekit.android.core.interfaces;
 
+import android.app.Activity;
 import android.view.View;
 import android.webkit.WebView;
 
@@ -12,6 +13,12 @@ public interface IJAIR
 	
 	int getResourceId(String id);
 	
+	void check();
+	void destroyBridge();
+	void restartBridge();
+	void setCurrentActivity(Activity activity);
+	
+	
 	void publishValue(String name, int value);
 	void publishValue(String name, double value);
 	void publishValue(String name, String value);
@@ -21,5 +28,6 @@ public interface IJAIR
 	
 	void registerStatusEventReceiver(IJAIREventReceivable receiver);
 	void unregisterStatusEventReceiver(IJAIREventReceivable receiver);
+	
 	
 }

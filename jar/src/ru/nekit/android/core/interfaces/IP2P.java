@@ -7,6 +7,7 @@ public interface IP2P
 	
 	void connect(String groupSuffix);
 	void disconnect();
+	
 	void setCurrentP2PClient(ClientProxy client);
 	
 	void registerP2PStatuEventReceiver(IP2PEventReceivable receiver);

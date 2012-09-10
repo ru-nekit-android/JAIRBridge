@@ -831,10 +831,11 @@ containing a value of this type.
         public static final int abs__up=0x7f05000b;
         public static final int button=0x7f050027;
         public static final int connect=0x7f05002b;
+        public static final int destroy=0x7f05002c;
         public static final int disableHome=0x7f050009;
         public static final int homeAsUp=0x7f050006;
         public static final int listMode=0x7f050002;
-        public static final int menuItemContainer=0x7f05002c;
+        public static final int menuItemContainer=0x7f05002d;
         public static final int normal=0x7f050001;
         public static final int send=0x7f050029;
         public static final int showCustom=0x7f050008;
@@ -911,9 +912,10 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0009;
         public static final int app_name=0x7f0a000b;
         public static final int connect=0x7f0a000c;
+        public static final int destroy=0x7f0a000d;
         public static final int hello=0x7f0a000a;
-        public static final int invite_key=0x7f0a000e;
-        public static final int send=0x7f0a000d;
+        public static final int invite_key=0x7f0a000f;
+        public static final int send=0x7f0a000e;
     }
     public static final class style {
         public static final int Animation_ActivityTransition=0x7f0b0059;

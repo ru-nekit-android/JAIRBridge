@@ -7,12 +7,16 @@ import android.content.Context;
 
 public class StubP2PContext implements IP2P {
 
-	@SuppressWarnings("unused")
-	private Context context;
-	
-	public StubP2PContext(Context context)
+
+	private static StubP2PContext instance;
+
+	public static StubP2PContext getInstance(Context context)
 	{
-		this.context = context;
+		if( instance == null )
+		{
+			instance = new StubP2PContext();
+		}
+		return instance;
 	}
 
 	@Override
@@ -36,13 +40,13 @@ public class StubP2PContext implements IP2P {
 	@Override
 	public void setCurrentP2PClient(ClientProxy client) 
 	{
-		
+
 	}
 
 	@Override
 	public void disconnect()
 	{
-		
+
 	}
 
 }

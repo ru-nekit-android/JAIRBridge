@@ -79,6 +79,7 @@ package
 				if( connected )
 				{
 					p2p.close();
+					connected = false;
 				}
 			}
 		}
